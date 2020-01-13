@@ -31,10 +31,35 @@
  *  pipe(add2, multiplyBy3, multiplyBy3)(5) // 63
  */
 
+
 'use strict';
 
-var compose = function() {
+var compose = function(){
+  var args = Array.prototype.slice.call(arguments);
+  return function(val){
+    for(var i = args.length - 1; i >= 0; i--){
+      val = args[i](val);
+    }
+    return val;
+  };
+
+
+  return args.reduceRight((val)  => {
+    val
+  })
 };
 
-var pipe = function() {
+var pipe = function(){  
+ var args = Array.prototype.slice.call(arguments);
+  print("Arguments are: ", args);
+  return function(value){
+    for(var i = 0; i <args.length; i++){
+      print("Piping ", args[i], " on ", value);
+      value = args[i](value);
+      print("Current value: ", value)
+    }
+    return value;
+  };
 };
+
+
