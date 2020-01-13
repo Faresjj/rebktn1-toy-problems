@@ -42,3 +42,35 @@ spiralTraversal([[ 1 ], [ 2 ], [ 3 ], [ 4 ]])	// [ 1, 2, 3, 4 ]
 
 spiralTraversal([[ 1, 2, 3, 4, 5, 6, 7 ]]) // [ 1, 2, 3, 4, 5, 6, 7 ]
 */
+
+function spiralTraversal (matrix) {
+
+  let result = [];
+
+    while (matrix.length) {
+      result = result.concat(matrix.shift());
+      if (matrix.length) {
+        for (var i = 0; i < matrix.length; i++) {
+          result.push(matrix[i].pop());
+          if (!matrix[i].length) {
+            matrix.splice(i, 1);
+            i--;
+          }
+        }
+      }
+      if (matrix.length) {
+        result = result.concat(matrix.pop().reverse());
+      }
+      if (matrix.length) {
+        for (var i = matrix.length - 1; i >= 0; i--) {
+          result.push(matrix[i].shift());
+          if (!matrix[i].length) {
+            matrix.splice(i, 1);
+          }
+        }
+      }
+      
+    }
+  
+  return result;
+}
